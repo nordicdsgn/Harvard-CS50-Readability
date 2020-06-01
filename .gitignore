@@ -1,5 +1,5 @@
 # Created by Emile Clark-Boman
 
-src/*.exe # compiled readability.c
-src/*.zip # zip version of repo
-src/zip-dir.py #
+src/*.exe
+src/*.zip
+zip-dir.py
