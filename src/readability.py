@@ -19,9 +19,10 @@ def liau(letters, words, sentences):
 # manual
 def usage():
     print()
-    print('USAGE: {python{3}} readability.py [-p STATE]')
-    print('       Aliases: (-p, --precise, --precision)')
-    print('       States: (0, false, False); (1, true, True)')
+    print('USAGE: {python{3}} readability.py [-u] [-p STATE]')
+    print('       ALIASES: (-p, --usage)')
+    print('              : (-p, --precise, --precision)')
+    print('       STATES: (0, false, False); (1, true, True)')
     print()
 
     sys.exit(0)
@@ -29,8 +30,36 @@ def usage():
 
 # main
 def main():
+    # precise calculations
+    precision = False
+
+    # acceptable paramsters (precision)
+    pparams = ['-p', '--precision', '--precise']
+    # acceptable paramaterd (usage)
+    uparams = ['-u', '--usage']
+
+    # acceptable paramater responses
+    resps = ['true', 'True', '1']
+
+    # amount of arguements
+    length = len(sys.argv)
+
+    # arguement handling
+    try:
+        # check args for precise calculations
+        if sys.argv[1] in pparams and sys.argv[2] in resps:
+            precision = True
+        # usage or INVALID
+        elif sys.argv[1] in uparams or length > 1:
+            usage()
+    except IndexError: # sys.argv at insufficient length
+        usage()
+
+
+    # get input
     text = input('Text: ')
 
+    # text
     letters = 0
     words = 1
     sentences = 0
@@ -44,23 +73,6 @@ def main():
             letters += 1
 
     index = liau(letters, words, sentences)
-
-
-    # precise calculations
-    precision = False
-    # acceptable paramters
-    params = ['-p', '--precision', '--precise']
-    # acceptable paramater responses
-    resps = ['true', 'True', '1']
-
-    # check args for precise calculations
-    if len(sys.argv) == 3:
-        if sys.argv[1] in params and sys.argv[2] in resps:
-            precision = True
-        else:
-            usage()
-    elif len(sys.argv) > 1:
-        usage()
 
 
     # precise calculations
