@@ -2,4 +2,3 @@
 
 *.exe # compiled readability.c
 *.zip # zip version of repo
-zip-dir.py # script to zip directory
