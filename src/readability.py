@@ -19,10 +19,9 @@ def liau(letters, words, sentences):
 # manual
 def usage():
     print()
-    print('USAGE: {python{3}} readability.py [-u] [-p STATE]')
+    print('USAGE: {python{3}} readability.py [-u] [-p]')
     print('       ALIASES: (-p, --usage)')
-    print('              : (-p, --precise, --precision)')
-    print('       STATES: (0, false, False); (1, true, True)')
+    print('              : (-p, --precise')
     print()
 
     sys.exit(0)
@@ -34,24 +33,31 @@ def main():
     precision = False
 
     # acceptable paramsters (precision)
-    pparams = ['-p', '--precision', '--precise']
+    pparams = ['-p', '--precise']
     # acceptable paramaterd (usage)
     uparams = ['-u', '--usage']
-
-    # acceptable paramater responses
-    resps = ['true', 'True', '1']
 
     # amount of arguements
     length = len(sys.argv)
 
     # arguement handling
     try:
-        # check args for precise calculations
-        if sys.argv[1] in pparams and sys.argv[2] in resps:
-            precision = True
-        # usage or INVALID
-        elif sys.argv[1] in uparams or length > 1:
-            usage()
+        for pos, arg in enumerate(sys.argv):
+            if pos == 0: #skip arg: "readability.py"
+                continue
+
+            # no args
+            if length == 1:
+                pass # do nothing
+            # check args for precise calculations
+            elif arg in pparams:
+                precision = True
+            # usage or INVALID
+            elif arg in uparams:
+                usage()
+            else: # other
+                print('\n[!] Invalid Arguement: \"' + arg + '\"')
+                usage()
     except IndexError: # sys.argv at insufficient length
         usage()
 
